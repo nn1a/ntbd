@@ -14,7 +14,7 @@ import type {
   Row,
   Table as ReactTable,
   PaginationState,
-  Column,
+  
 } from "@tanstack/react-table";
 
 import classNames from "classnames";
@@ -86,11 +86,6 @@ function Table<T extends object>({
                               header.column.columnDef.header,
                               header.getContext(),
                             )}
-                        {header.column.getCanFilter() ? (
-                          <div>
-                            <Filter column={header.column} table={table} />
-                          </div>
-                        ) : null}
                       </th>
                     ))}
                   </tr>
@@ -210,57 +205,6 @@ function Pagination<T>({
         </div>
       </div>
     </div>
-  );
-}
-
-interface ReactTableFilterProps<T extends object> {
-  table: ReactTable<T>;
-  column: Column<T, T>;
-}
-
-function Filter<T extends object>({ column, table }: ReactTableFilterProps<T>) {
-  const firstValue = table
-    .getPreFilteredRowModel()
-    .flatRows[0]?.getValue(column.id);
-
-  const columnFilterValue = column.getFilterValue();
-
-  return typeof firstValue === "number" ? (
-    <div className="flex space-x-2" onClick={(e) => e.stopPropagation()}>
-      <input
-        type="number"
-        value={(columnFilterValue as [number, number])?.[0] ?? ""}
-        onChange={(e) =>
-          column.setFilterValue((old: [number, number]) => [
-            e.target.value,
-            old?.[1],
-          ])
-        }
-        placeholder={`Min`}
-        className="w-24 rounded border shadow"
-      />
-      <input
-        type="number"
-        value={(columnFilterValue as [number, number])?.[1] ?? ""}
-        onChange={(e) =>
-          column.setFilterValue((old: [number, number]) => [
-            old?.[0],
-            e.target.value,
-          ])
-        }
-        placeholder={`Max`}
-        className="w-24 rounded border shadow"
-      />
-    </div>
-  ) : (
-    <input
-      className="w-36 rounded border shadow"
-      onChange={(e) => column.setFilterValue(e.target.value)}
-      onClick={(e) => e.stopPropagation()}
-      placeholder={`Search...`}
-      type="text"
-      value={(columnFilterValue ?? "") as string}
-    />
   );
 }
 

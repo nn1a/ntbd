@@ -3,6 +3,7 @@ import Content from "../components/Content";
 import Modal from "../components/Modal";
 import Table from "../components/Table";
 import { useMemo } from "react";
+import { Button } from "../components/Button";
 
 interface Datatypes {
   id: number;
@@ -48,7 +49,8 @@ function Home() {
   );
   return (
     <Content>
-      <Modal></Modal>
+      <Modal>Hello</Modal>
+      <Button label={""} primary></Button>
       <Table data={data} columns={columns} className="bg-gray-50" />
     </Content>
   );
