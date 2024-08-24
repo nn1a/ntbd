@@ -11,5 +11,8 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const _Modal: Story = {
-  args: {},
+  args: {
+    isOpen: true,
+    children: 'Model Main',
+  },
 };
