@@ -94,7 +94,7 @@ const Sidebar: React.FC<LeftSidebarProps> = ({ menuItems }) => {
           return (
             <li key={itemIndex}>
               <span
-                className={`flex cursor-pointer items-center rounded px-4 py-2 ${isSelected ? 'bg-blue-200' : 'hover:bg-blue-100'}`}
+                className={`flex cursor-pointer items-center rounded px-4 py-2 ${isSelected ? 'bg-blue-300' : 'hover:bg-blue-200'}`}
                 onClick={() => {
                   if (item.href) {
                     handleClick(item.href);

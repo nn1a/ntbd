@@ -1,10 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Sidebar from '../components/Sidebar';
+import { MemoryRouter } from 'react-router-dom';
 
 const meta = {
   title: 'UI/Sidebar',
   component: Sidebar,
   tags: ['autodocs'],
+  decorators: [
+    (Story) => (
+      <MemoryRouter initialEntries={['/']}>
+        <Story />
+      </MemoryRouter>
+    ),
+  ],
 } satisfies Meta<typeof Sidebar>;
 
 export default meta;

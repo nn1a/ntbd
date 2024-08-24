@@ -13,6 +13,7 @@ import type { ColumnDef, Row, Table as ReactTable, PaginationState, FilterFn } f
 
 import classNames from 'classnames';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
+import { Select } from './Select';
 
 interface ReactTableProps<T extends object> {
   data: T[];
@@ -41,7 +42,7 @@ function Table<T extends object>({
 }: ReactTableProps<T>) {
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: pageIndex ?? 0,
-    pageSize: pageSize ?? 15,
+    pageSize: pageSize ?? 10,
   });
   const [globalFilter, setGlobalFilter] = useState<string>('');
 
@@ -171,19 +172,16 @@ function Pagination<T>({
           />
         </div>
 
-        <select
+        <span className="px-2 text-sm text-gray-700">Page Size</span>
+        <Select
+          options={[10, 20, 30, 40, 50].map((size) => ({ label: `${size}`, value: size }))}
+          placeHolder={`${table.getState().pagination.pageSize}`}
           value={table.getState().pagination.pageSize}
-          onChange={(e) => {
-            table.setPageSize(Number(e.target.value));
+          width='w-24'
+          onChange={(value) => {
+            table.setPageSize(value as number);
           }}
-          className="block rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-        >
-          {[10, 20, 30, 40, 50].map((pageSize) => (
-            <option key={pageSize} value={pageSize}>
-              Show {pageSize}
-            </option>
-          ))}
-        </select>
+        />
         <div>
           <nav aria-label="Pagination" className="isolate inline-flex -space-x-px rounded-md shadow-sm">
             <button
@@ -201,7 +199,7 @@ function Pagination<T>({
                 onClick={() => table.setPageIndex(item - 1)}
                 className={
                   item === table.getState().pagination.pageIndex + 1
-                    ? 'relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+                    ? 'relative z-10 inline-flex items-center bg-blue-400 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400'
                     : 'relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0'
                 }
               >
