@@ -4,7 +4,7 @@ type Props = {
   children: ReactNode;
 };
 
-const Content = ({ children }: Props) => {
+const Page = ({ children }: Props) => {
   return (
     <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
       <main className="grow">
@@ -14,4 +14,4 @@ const Content = ({ children }: Props) => {
   );
 };
 
-export default Content;
+export default Page;

@@ -5,10 +5,12 @@ import { Outlet } from 'react-router-dom';
 import LeftSidebar from '../components/Sidebar';
 import { navMenuItems } from '../menus/navbar';
 import { sidebarMenuItems } from '../menus/sidebar';
+import Notice from '../components/Notice';
 
 function Dashboard() {
   return (
     <div className="flex h-screen flex-col">
+      <Notice></Notice>
       <Navbar menuItems={navMenuItems}></Navbar>
       <div className="flex flex-grow overflow-hidden">
         <LeftSidebar menuItems={sidebarMenuItems} />

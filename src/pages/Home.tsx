@@ -1,9 +1,7 @@
 import { ColumnDef } from '@tanstack/react-table';
-import Content from '../components/Content';
-import Modal from '../components/Modal';
+import Page from '../components/Page';
 import Table from '../components/Table';
 import { useMemo } from 'react';
-import { Button } from '../components/Button';
 
 interface Datatypes {
   id: number;
@@ -48,11 +46,9 @@ function Home() {
     []
   );
   return (
-    <Content>
-      <Modal>Hello</Modal>
-      <Button label={''} primary></Button>
+    <Page>
       <Table data={data} columns={columns} className="bg-gray-50" />
-    </Content>
+    </Page>
   );
 }
 

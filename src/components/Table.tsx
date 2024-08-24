@@ -9,7 +9,7 @@ import {
   getFilteredRowModel,
 } from '@tanstack/react-table';
 
-import type { ColumnDef, Row, Table as ReactTable, PaginationState } from '@tanstack/react-table';
+import type { ColumnDef, Row, Table as ReactTable, PaginationState, FilterFn } from '@tanstack/react-table';
 
 import classNames from 'classnames';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
@@ -25,6 +25,10 @@ interface ReactTableProps<T extends object> {
   className?: string;
 }
 
+const dummyFuzzyFilter: FilterFn<unknown> = () => {
+  return true;
+};
+
 function Table<T extends object>({
   data,
   columns,
@@ -39,10 +43,15 @@ function Table<T extends object>({
     pageIndex: pageIndex ?? 0,
     pageSize: pageSize ?? 15,
   });
+  const [globalFilter, setGlobalFilter] = useState<string>('');
 
   const table = useReactTable({
     data,
     columns,
+    filterFns: {
+      fuzzy: dummyFuzzyFilter,
+    },
+    onGlobalFilterChange: setGlobalFilter,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -51,6 +60,7 @@ function Table<T extends object>({
     pageCount,
     state: {
       pagination,
+      globalFilter,
     },
   });
   useEffect(() => {
@@ -64,6 +74,15 @@ function Table<T extends object>({
       <div className="overflow-x-auto">
         <div className="inline-block min-w-full py-1">
           <div className="overflow-hidden p-1">
+            <div className="mb-4 flex justify-between">
+              <button className="rounded-md bg-blue-500 px-4 py-2 text-white">Export CSV</button>
+              <input
+                value={globalFilter || ''}
+                onChange={(e) => setGlobalFilter(e.target.value)}
+                placeholder="Search..."
+                className="rounded-md border border-gray-300 px-4 py-2"
+              />
+            </div>
             <table className={classNames(`Table min-w-full`, className)}>
               <thead>
                 {table.getHeaderGroups().map((headerGroup) => (
@@ -74,7 +93,9 @@ function Table<T extends object>({
                         scope="col"
                         className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
                       >
-                        {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                        {header.isPlaceholder ? null : (
+                          <>{flexRender(header.column.columnDef.header, header.getContext())}</>
+                        )}
                       </th>
                     ))}
                   </tr>
@@ -111,9 +132,8 @@ function Table<T extends object>({
                 ))}
               </tbody>
             </table>
+            <Pagination table={table} />
           </div>
-
-          <Pagination table={table} />
         </div>
       </div>
     </div>
@@ -134,12 +154,36 @@ function Pagination<T>({
   return (
     <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
       <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-        <div>
-          <p className="text-sm text-gray-700">
+        <div className="hidden sm:flex sm:flex-1 sm:items-center">
+          <p className="px-1 text-sm text-gray-700">
             Page <span className="font-medium">{table.getState().pagination.pageIndex + 1} </span> of{' '}
             <span className="font-medium">{table.getPageCount()}</span>
           </p>
+          <span className="px-2 text-sm text-gray-700">| Go to page:</span>
+          <input
+            type="number"
+            value={table.getState().pagination.pageIndex + 1}
+            onChange={(e) => {
+              const page = e.target.value ? Number(e.target.value) - 1 : 0;
+              table.setPageIndex(page);
+            }}
+            className="w-16 rounded border p-0 pl-2 text-sm text-gray-700"
+          />
         </div>
+
+        <select
+          value={table.getState().pagination.pageSize}
+          onChange={(e) => {
+            table.setPageSize(Number(e.target.value));
+          }}
+          className="block rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+        >
+          {[10, 20, 30, 40, 50].map((pageSize) => (
+            <option key={pageSize} value={pageSize}>
+              Show {pageSize}
+            </option>
+          ))}
+        </select>
         <div>
           <nav aria-label="Pagination" className="isolate inline-flex -space-x-px rounded-md shadow-sm">
             <button

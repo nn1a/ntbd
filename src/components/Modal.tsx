@@ -1,11 +1,14 @@
-import { PropsWithChildren, useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { Button } from './Button';
 
-const Modal = ({ children }: PropsWithChildren) => {
-  const [showModal, setShowModal] = useState(false);
+interface ModalProps {
+  isOpen: boolean;
+  children: ReactNode;
+}
+const Modal = ({ isOpen = false, children }: ModalProps) => {
+  const [showModal, setShowModal] = useState(isOpen);
   return (
     <>
-      <Button onClick={() => setShowModal(true)} label="Open Modal" primary></Button>
       {showModal ? (
         <>
           <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden outline-none focus:outline-none">
