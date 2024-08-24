@@ -1,15 +1,11 @@
-import { PropsWithChildren, useState } from "react";
-import { Button } from "./Button";
+import { PropsWithChildren, useState } from 'react';
+import { Button } from './Button';
 
 const Modal = ({ children }: PropsWithChildren) => {
   const [showModal, setShowModal] = useState(false);
   return (
     <>
-      <Button
-        onClick={() => setShowModal(true)}
-        label="Open Modal"
-        primary
-      ></Button>
+      <Button onClick={() => setShowModal(true)} label="Open Modal" primary></Button>
       {showModal ? (
         <>
           <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden outline-none focus:outline-none">
@@ -21,22 +17,13 @@ const Modal = ({ children }: PropsWithChildren) => {
                     className="float-right border-0 bg-transparent text-black"
                     onClick={() => setShowModal(false)}
                   >
-                    <span className="opacity-7 block h-7 w-7 rounded-full bg-gray-400 p-0 text-xl text-black">
-                      x
-                    </span>
+                    <span className="opacity-7 block h-7 w-7 rounded-full bg-gray-400 p-0 text-xl text-black">x</span>
                   </button>
                 </div>
                 <div className="relative flex-auto p-6">{children}</div>
                 <div className="border-blueGray-200 flex items-center justify-end rounded-b border-t border-solid p-6">
-                  <Button
-                    onClick={() => setShowModal(false)}
-                    label="Close"
-                  ></Button>
-                  <Button
-                    onClick={() => setShowModal(false)}
-                    label="Submit"
-                    primary
-                  ></Button>
+                  <Button onClick={() => setShowModal(false)} label="Close"></Button>
+                  <Button onClick={() => setShowModal(false)} label="Submit" primary></Button>
                 </div>
               </div>
             </div>

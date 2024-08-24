@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import Dashboard from "../layouts/Dashboard";
+import type { Meta, StoryObj } from '@storybook/react';
+import Dashboard from '../layouts/Dashboard';
 
 const meta = {
-  title: "UI/Layout",
+  title: 'Layout/Dashboard',
   component: Dashboard,
   tags: ['autodocs'],
 } satisfies Meta<typeof Dashboard>;

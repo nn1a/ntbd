@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import Table from "../components/Table";
+import type { Meta, StoryObj } from '@storybook/react';
+import Table from '../components/Table';
 
 const meta = {
-  title: "UI/Table",
+  title: 'UI/Table',
   component: Table,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 } satisfies Meta<typeof Table>;
 
 export default meta;
@@ -15,33 +15,33 @@ export const _Table: Story = {
     data: [
       {
         id: 1,
-        name: "John Doe 1",
-        email: "",
+        name: 'John Doe 1',
+        email: '',
       },
       {
         id: 1,
-        name: "John Doe 2",
-        email: "",
+        name: 'John Doe 2',
+        email: '',
       },
     ],
-    columns:[
-        {
-          id: "id",
-          header: "Id",
-          accessorKey: "id",
-          cell: (ctx) => ctx.getValue(),
-        },
-        {
-          id: "name",
-          header: "Name",
-          accessorKey: "name",
-          cell: (ctx) => ctx.getValue(),
-        },
-        {
-          id: "email",
-          header: "Email",
-          cell: (ctx) => ctx.getValue(),
-        },
-      ],
+    columns: [
+      {
+        id: 'id',
+        header: 'Id',
+        accessorKey: 'id',
+        cell: (ctx) => ctx.getValue(),
+      },
+      {
+        id: 'name',
+        header: 'Name',
+        accessorKey: 'name',
+        cell: (ctx) => ctx.getValue(),
+      },
+      {
+        id: 'email',
+        header: 'Email',
+        cell: (ctx) => ctx.getValue(),
+      },
+    ],
   },
 };

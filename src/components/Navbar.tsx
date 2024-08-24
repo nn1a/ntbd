@@ -1,78 +1,94 @@
-import { useState } from "react";
-import classNames from "classnames";
-import { HamburgerIcon, HomeIcon } from "./Icons";
+import React from 'react';
 
-const Navbar = () => {
-  const [menuToggle, setMenuToggle] = useState(false);
+export interface MenuItem {
+  label?: string;
+  href?: string;
+  align?: 'left' | 'right';
+  icon?: React.ReactNode;
+  onClick?: () => void;
+  isBrandItem?: boolean;
+  isLogo?: boolean;
+}
 
+interface NavbarProps {
+  menuItems?: MenuItem[];
+}
+
+const Navbar: React.FC<NavbarProps> = ({ menuItems = [] }) => {
   return (
-    <nav className="bg-gray-100">
-      <div className="mx-0 max-w-full px-0">
-        <div className="flex justify-between">
-          {/* Desktop Menu */}
-          <div className="flex space-x-4">
-            <div>
-              <a href="#" className="flex items-center px-2 py-5 text-gray-700">
-                <HomeIcon class="text-blue-400"></HomeIcon>
-                <span className="font-bold">Home</span>
-              </a>
-            </div>
-            <div className="hidden items-center space-x-1 md:flex">
+    <nav className="bg-white shadow-md">
+      <div className="flex items-center justify-between px-4 py-3">
+        <div className="flex items-center space-x-4">
+          {menuItems
+            .filter((item) => item.isLogo || item.isBrandItem)
+            .map((item, index) => (
               <a
-                href="#"
-                className="px-3 py-5 text-gray-700 hover:text-gray-900"
+                key={index}
+                href={item.href}
+                className="flex cursor-pointer items-center space-x-2"
+                onClick={item.onClick}
+                aria-label={item.label || ''}
               >
-                Docs
+                {item.isLogo && (
+                  <div className="flex h-8 w-8 items-center">
+                    {typeof item.icon === 'string' ? (
+                      <img src={item.icon} alt="Logo" className="h-full w-full" />
+                    ) : (
+                      item.icon
+                    )}
+                  </div>
+                )}
+                {item.isBrandItem && !item.isLogo && (
+                  <span className="cursor-pointer text-xl font-bold">{item.label}</span>
+                )}
               </a>
-              <a
-                href="#"
-                className="px-3 py-5 text-gray-700 hover:text-gray-900"
-              >
-                Dashboard
-              </a>
-            </div>
-          </div>
+            ))}
 
-          <div className="hidden items-center space-x-1 md:flex">
-            <a href="#" className="px-3 py-5">
-              Login
-            </a>
-          </div>
-
-          {/* mobile menu */}
-          <div className="flex items-center md:hidden">
-            <button onClick={() => setMenuToggle(!menuToggle)}>
-              {menuToggle ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              ) : (
-                <HamburgerIcon class=""></HamburgerIcon>
-              )}
-            </button>
-          </div>
+          <ul className="flex space-x-4">
+            {menuItems
+              .filter((item) => !item.isLogo && !item.isBrandItem && item.align !== 'right')
+              .map((item, index) => (
+                <li key={index} className="list-none">
+                  {item.href ? (
+                    <a href={item.href} className="flex items-center space-x-2 text-gray-700 hover:text-gray-900">
+                      {item.icon && <span>{item.icon}</span>}
+                      <span>{item.label}</span>
+                    </a>
+                  ) : (
+                    <button
+                      onClick={item.onClick}
+                      className="flex items-center space-x-2 text-gray-700 hover:text-gray-900"
+                    >
+                      {item.icon && <span>{item.icon}</span>}
+                      <span>{item.label}</span>
+                    </button>
+                  )}
+                </li>
+              ))}
+          </ul>
         </div>
-      </div>
-
-      {/* mobile menu items */}
-      <div className={classNames("md:hidden", { hidden: !menuToggle })}>
-        <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-200">
-          Docs
-        </a>
-        <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-200">
-          Dashboard
-        </a>
+        <ul className="flex space-x-4">
+          {menuItems
+            .filter((item) => !item.isLogo && !item.isBrandItem && item.align === 'right')
+            .map((item, index) => (
+              <li key={index} className="list-none">
+                {item.href ? (
+                  <a href={item.href} className="flex items-center space-x-2 text-gray-700 hover:text-gray-900">
+                    {item.icon && <span>{item.icon}</span>}
+                    <span>{item.label}</span>
+                  </a>
+                ) : (
+                  <button
+                    onClick={item.onClick}
+                    className="flex items-center space-x-2 text-gray-700 hover:text-gray-900"
+                  >
+                    {item.icon && <span>{item.icon}</span>}
+                    <span>{item.label}</span>
+                  </button>
+                )}
+              </li>
+            ))}
+        </ul>
       </div>
     </nav>
   );

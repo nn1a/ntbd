@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from 'react';
 
 import {
   getCoreRowModel,
@@ -7,18 +7,12 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   getFilteredRowModel,
-} from "@tanstack/react-table";
+} from '@tanstack/react-table';
 
-import type {
-  ColumnDef,
-  Row,
-  Table as ReactTable,
-  PaginationState,
-  
-} from "@tanstack/react-table";
+import type { ColumnDef, Row, Table as ReactTable, PaginationState } from '@tanstack/react-table';
 
-import classNames from "classnames";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import classNames from 'classnames';
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 
 interface ReactTableProps<T extends object> {
   data: T[];
@@ -80,12 +74,7 @@ function Table<T extends object>({
                         scope="col"
                         className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
                       >
-                        {header.isPlaceholder
-                          ? null
-                          : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext(),
-                            )}
+                        {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                       </th>
                     ))}
                   </tr>
@@ -97,8 +86,7 @@ function Table<T extends object>({
                   <Fragment key={row.id}>
                     <tr
                       className={classNames({
-                        "dark:bg-black-300 bg-gray-50 transition-colors":
-                          row.getIsExpanded(),
+                        'dark:bg-black-300 bg-gray-50 transition-colors': row.getIsExpanded(),
                       })}
                     >
                       {row.getVisibleCells().map((cell) => (
@@ -109,19 +97,14 @@ function Table<T extends object>({
                           key={cell.id}
                           className="whitespace-nowrap px-6 py-4"
                         >
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext(),
-                          )}
+                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
                         </td>
                       ))}
                     </tr>
 
                     {renderSubComponent ? (
-                      <tr key={row.id + "-expanded"}>
-                        <td colSpan={columns.length}>
-                          {renderSubComponent({ row })}
-                        </td>
+                      <tr key={row.id + '-expanded'}>
+                        <td colSpan={columns.length}>{renderSubComponent({ row })}</td>
                       </tr>
                     ) : null}
                   </Fragment>
@@ -139,9 +122,7 @@ function Table<T extends object>({
 
 function getPaginationPages(i: number, n: number) {
   const startPage = Math.max(Math.floor((i - 1) / 10) * 10 + 1, 1);
-  return Array.from({ length: 10 }, (_, k) => startPage + k).filter(
-    (page) => page >= 1 && page <= n,
-  );
+  return Array.from({ length: 10 }, (_, k) => startPage + k).filter((page) => page >= 1 && page <= n);
 }
 
 function Pagination<T>({
@@ -149,27 +130,18 @@ function Pagination<T>({
 }: React.PropsWithChildren<{
   table: ReactTable<T>;
 }>) {
-  const pages = getPaginationPages(
-    table.getState().pagination.pageIndex + 1,
-    table.getPageCount(),
-  );
+  const pages = getPaginationPages(table.getState().pagination.pageIndex + 1, table.getPageCount());
   return (
     <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
       <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
         <div>
           <p className="text-sm text-gray-700">
-            Page{" "}
-            <span className="font-medium">
-              {table.getState().pagination.pageIndex + 1}{" "}
-            </span>{" "}
-            of <span className="font-medium">{table.getPageCount()}</span>
+            Page <span className="font-medium">{table.getState().pagination.pageIndex + 1} </span> of{' '}
+            <span className="font-medium">{table.getPageCount()}</span>
           </p>
         </div>
         <div>
-          <nav
-            aria-label="Pagination"
-            className="isolate inline-flex -space-x-px rounded-md shadow-sm"
-          >
+          <nav aria-label="Pagination" className="isolate inline-flex -space-x-px rounded-md shadow-sm">
             <button
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
@@ -185,8 +157,8 @@ function Pagination<T>({
                 onClick={() => table.setPageIndex(item - 1)}
                 className={
                   item === table.getState().pagination.pageIndex + 1
-                    ? "relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                    : "relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+                    ? 'relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+                    : 'relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0'
                 }
               >
                 {item}
