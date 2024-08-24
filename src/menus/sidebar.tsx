@@ -1,15 +1,15 @@
 export const sidebarMenuItems = [
   {
     label: 'Home',
-    href: '/',
+    href: '/home',
   },
   {
     label: 'About',
     // href: "/about",
     subItems: [
       {
-        label: 'Team',
-        href: '/about/team',
+        label: 'Grid',
+        href: '/about/grid',
       },
       {
         label: 'Company',
