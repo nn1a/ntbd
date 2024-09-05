@@ -3,7 +3,7 @@ import Box from '../components/Box';
 
 function Home() {
   return (
-    <Paper>
+    <Paper elevation={4}>
       <Box>
         <div>HOME</div>
       </Box>

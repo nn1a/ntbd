@@ -131,7 +131,7 @@ const Sidebar: React.FC<LeftSidebarProps> = ({ menuItems }) => {
   };
 
   return (
-    <div className="h-screen w-64 overflow-y-auto border-r border-gray-300 bg-gray-100 p-4">
+    <div className="h-screen w-64 overflow-y-auto border-r border-gray-300 bg-gray-200 p-4">
       {renderMenuItems(menuItems)}
     </div>
   );
