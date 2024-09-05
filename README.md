@@ -1,50 +1,67 @@
-# React + TypeScript + Vite
+# Dashboard Template
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🚧 **This is a work-in-progress dashboard template.** 🚧  
+Built with modern web development tools like **React**, **TypeScript**, **TailwindCSS**, **Storybook**, **TanStack Table**, **Vite**, and **SWC**, this template provides a strong foundation for creating customizable and scalable dashboard applications.
 
-Currently, two official plugins are available:
+## Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/nn1a/ntbd.git
+   ```
+2. Navigate to the project folder:
+   ```bash
+   cd ntbd
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-## Expanding the ESLint configuration
+## Usage
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Development
 
-- Configure the top-level `parserOptions` property like this:
+Run the app in development mode:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
+```bash
+npm run dev
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react';
+### Storybook
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-});
+Start Storybook to develop and test components in isolation:
+
+```bash
+npm run storybook
 ```
+
+### Build
+
+To create an optimized production build:
+
+```bash
+npm run build
+```
+
+The build output will be located in the `dist/` directory.
+
+## Technologies Used
+
+- **React**: For building the interactive user interface.
+- **TypeScript**: Ensuring code quality and better maintainability.
+- **TailwindCSS**: For responsive, mobile-first, and customizable styling.
+- **Storybook**: To visualize and test components individually.
+- **TanStack Table**: For building fast, flexible, and customizable data tables.
+- **Vite**: For fast, modern development and build tooling.
+- **SWC (Speedy Web Compiler)**: For blazing-fast code transformation and bundling.
+
+## Contributing
+
+Feel free to submit issues, fork the repository, and send pull requests! Contributions are always welcome.
+
+## License
+
+This project is licensed under the MIT License.
