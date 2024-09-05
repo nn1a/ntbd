@@ -11,7 +11,7 @@ function Dashboard() {
   return (
     <div className="flex h-screen flex-col">
       <Notice></Notice>
-      <Navbar  menuItems={navMenuItems}></Navbar>
+      <Navbar menuItems={navMenuItems}></Navbar>
       <div className="flex flex-grow overflow-hidden">
         <LeftSidebar menuItems={sidebarMenuItems} />
         <div className="flex-1 overflow-auto bg-slate-300 p-4">

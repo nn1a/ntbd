@@ -16,7 +16,7 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ menuItems = [] }) => {
   return (
-    <nav className="h-16 bg-gray-200 shadow-lg z-50">
+    <nav className="z-50 h-16 bg-gray-200 shadow-lg">
       <div className="flex items-center justify-between px-4 py-3">
         <div className="flex items-center space-x-4">
           {menuItems

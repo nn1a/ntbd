@@ -29,7 +29,9 @@ const options = {
 function GraphTest() {
   return (
     <Paper>
-      <Paper className='bg-slate-200' elevation={4}>Graph Test</Paper>
+      <Paper className="bg-slate-200" elevation={4}>
+        Graph Test
+      </Paper>
       <Box style={{ height: 'calc(100vh - 218px)' }}>
         <NetworkGraph nodes={nodes} edges={edges} options={options} />
       </Box>
