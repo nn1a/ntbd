@@ -7,19 +7,12 @@ import Box from '../components/Box';
 interface Datatypes {
   id: number;
   name: string;
-  email: string;
+  desc: string;
 }
 
-function TableTest() {
-  const data: Datatypes[] = [];
-  for (let i = 0; i < 31; i++) {
-    data.push({
-      id: i,
-      name: 'John Doe' + i,
-      email: '',
-    });
-  }
+const data: Datatypes[] = Array.from({ length: 31 }, (_v, i) => ({ id: i, name: `John Doe${i}`, desc: 'who?' }));
 
+function TableTest() {
   const columns = useMemo<ColumnDef<Datatypes>[]>(
     () => [
       {
@@ -35,12 +28,11 @@ function TableTest() {
         cell: (ctx) => ctx.getValue(),
       },
       {
-        id: 'email',
-        header: 'Email',
+        id: 'desc',
+        header: 'Desc',
         cell: (ctx) => {
-          const { email } = ctx.row.original;
-
-          return <span className="font-bold">{email}</span>;
+          const { desc } = ctx.row.original;
+          return <span className="font-bold">{desc}</span>;
         },
       },
     ],

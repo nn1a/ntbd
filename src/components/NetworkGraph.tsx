@@ -36,7 +36,7 @@ const NetworkGraph: React.FC<NetworkProps> = ({ nodes, edges, options }) => {
     }
   }, [nodes, edges, options, isSizeConfirmed]);
 
-  return <div ref={containerRef} style={{ height: '100vh' }} />;
+  return <div ref={containerRef} style={{ height: '100%' }} />;
 };
 
 export default NetworkGraph;

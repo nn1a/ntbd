@@ -16,7 +16,7 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ menuItems = [] }) => {
   return (
-    <nav className="bg-white shadow-md">
+    <nav className="h-16 bg-gray-200 shadow-lg z-50">
       <div className="flex items-center justify-between px-4 py-3">
         <div className="flex items-center space-x-4">
           {menuItems
@@ -30,7 +30,7 @@ const Navbar: React.FC<NavbarProps> = ({ menuItems = [] }) => {
                 aria-label={item.label || ''}
               >
                 {item.isLogo && (
-                  <div className="flex h-8 w-8 items-center">
+                  <div className="flex h-11 w-8 items-center">
                     {typeof item.icon === 'string' ? (
                       <img src={item.icon} alt="Logo" className="h-full w-full" />
                     ) : (
