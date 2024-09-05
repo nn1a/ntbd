@@ -177,7 +177,7 @@ function Pagination<T>({
           options={[10, 20, 30, 40, 50].map((size) => ({ label: `${size}`, value: size }))}
           placeHolder={`${table.getState().pagination.pageSize}`}
           value={table.getState().pagination.pageSize}
-          width='w-24'
+          width="w-24"
           onChange={(value) => {
             table.setPageSize(value as number);
           }}

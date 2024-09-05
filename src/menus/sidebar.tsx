@@ -4,24 +4,32 @@ export const sidebarMenuItems = [
     href: '/home',
   },
   {
-    label: 'About',
-    // href: "/about",
+    label: 'Components',
+    // href: "/components",
     subItems: [
       {
         label: 'Grid',
-        href: '/about/grid',
+        href: '/components/grid',
       },
       {
-        label: 'Company',
-        // href: "/about/company",
+        label: 'Graph',
+        href: '/components/graph',
+      },
+      {
+        label: 'Table',
+        href: '/components/table',
+      },
+      {
+        label: 'Sub 3Depth',
+        // href: "/components/sub",
         subItems: [
           {
             label: 'History',
-            href: '/about/company/history',
+            href: '/components/sub/dummy',
           },
           {
             label: 'Mission',
-            href: '/about/company/mission',
+            href: '/components/sub/dummy1',
           },
         ],
       },
